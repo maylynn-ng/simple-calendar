@@ -1,9 +1,11 @@
+import { useState } from 'react';
+import styled from 'styled-components';
+
 import { Grid } from '../Grid';
 import { Button } from '../Button';
-import styled from 'styled-components';
-import { IEvent } from '../../utils';
 import { Modal } from '../Modal';
-import { useState } from 'react';
+import { CreateEvent } from '../CreateEvent';
+import type { IEvent } from '../../utils';
 
 const DashboardContainerDiv = styled.div`
   display: flex;
@@ -45,7 +47,7 @@ export const Dashboard = () => {
       <Grid />
       {modalState.state === 'create-event' && (
         <Modal onOutsideClick={() => setModalState({ state: 'none' })}>
-          I'M A MODAL
+          <CreateEvent />
         </Modal>
       )}
     </DashboardContainerDiv>

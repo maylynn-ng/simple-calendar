@@ -23,7 +23,5 @@ interface IModalProps {
 }
 
 export const Modal = ({ children, onOutsideClick }: IModalProps) => {
-  return (
-    <ModalContainerDiv onClick={onOutsideClick}>{children}</ModalContainerDiv>
-  );
+  return <ModalContainerDiv>{children}</ModalContainerDiv>;
 };

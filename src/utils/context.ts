@@ -6,4 +6,9 @@ interface IEventContext {
   setEvents: React.Dispatch<React.SetStateAction<IEvent[]>>;
 }
 
-export const EventContext = React.createContext<IEventContext | null>(null);
+export const EventContext = React.createContext<IEventContext>({
+  events: [],
+  setEvents: () => {
+    console.log('context not found');
+  },
+});

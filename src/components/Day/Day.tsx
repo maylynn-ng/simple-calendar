@@ -28,8 +28,8 @@ export const Day = ({ day }: DayProps) => {
         endTime={'15:00'}
         color={'yellow'}
       />
-      {hours.map(hour => (
-        <HourContainerDiv />
+      {hours.map((hour, i) => (
+        <HourContainerDiv key={`hour-${i}`} />
       ))}
     </DayContainerDiv>
   );

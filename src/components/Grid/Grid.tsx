@@ -30,14 +30,14 @@ export const Grid = () => {
     <GridContainerDiv>
       <div>
         <HourContainerDiv />
-        {hours.map(time => (
-          <HourContainerDiv>
+        {hours.map((time, i) => (
+          <HourContainerDiv key={`time-${i}`}>
             <span>{time}</span>
           </HourContainerDiv>
         ))}
       </div>
       {days.map(day => (
-        <Day day={day} />
+        <Day key={day} day={day} />
       ))}
     </GridContainerDiv>
   );
