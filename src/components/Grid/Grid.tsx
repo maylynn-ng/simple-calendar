@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Day } from '../Day';
 import { hours, days } from '../../utils';
@@ -9,8 +9,6 @@ const GridContainerDiv = styled.div`
 
   height: 100%;
   width: 100%;
-
-  border: solid 2px black;
 `;
 
 const DaysContainerDiv = styled.div`
@@ -18,9 +16,11 @@ const DaysContainerDiv = styled.div`
 `;
 
 export const HourContainerDiv = styled.div`
-  height: 48px;
+  ${({ theme }) => css`
+    height: ${theme.heights.hour};
 
-  border-bottom: solid 1px grey;
+    border-bottom: solid 1px grey;
+  `}
 `;
 
 export const Grid = () => {
@@ -29,7 +29,9 @@ export const Grid = () => {
       <div>
         <HourContainerDiv />
         {hours.map(time => (
-          <HourContainerDiv>{time}</HourContainerDiv>
+          <HourContainerDiv>
+            <span>{time}</span>
+          </HourContainerDiv>
         ))}
       </div>
       {days.map(day => (
