@@ -4,6 +4,8 @@ import { IEvent } from '../../utils';
 
 const EventContainerDiv = styled.div<{ color: IEvent['color'] }>`
   ${({ color, theme }) => css`
+    position: absolute;
+
     border-radius: ${theme.borderRadius};
 
     background-color: ${theme.eventColors[color]};

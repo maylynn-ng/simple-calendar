@@ -7,6 +7,8 @@ const GridContainerDiv = styled.div`
   display: flex;
   flex-direction: row;
 
+  padding: 1rem;
+
   height: 100%;
   width: 100%;
 `;

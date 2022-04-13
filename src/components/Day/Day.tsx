@@ -5,6 +5,8 @@ import { Event } from '../Event';
 import { hours } from '../../utils';
 
 const DayContainerDiv = styled.div`
+  position: relative;
+
   width: 100%;
   min-width: 4rem;
 
