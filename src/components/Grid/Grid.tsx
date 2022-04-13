@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 import { Day } from '../Day';
-import { hours, days } from '../../utils';
+import { hours, EventContext } from '../../utils';
+import { useContext } from 'react';
 
 const GridContainerDiv = styled.div`
   display: flex;
@@ -10,10 +11,6 @@ const GridContainerDiv = styled.div`
   padding: 1rem;
 
   height: 100%;
-  width: 100%;
-`;
-
-const DaysContainerDiv = styled.div`
   width: 100%;
 `;
 
@@ -26,6 +23,8 @@ export const HourContainerDiv = styled.div`
 `;
 
 export const Grid = () => {
+  const { currentWeekDates } = useContext(EventContext);
+
   return (
     <GridContainerDiv>
       <div>
@@ -36,8 +35,8 @@ export const Grid = () => {
           </HourContainerDiv>
         ))}
       </div>
-      {days.map(day => (
-        <Day key={day} day={day} />
+      {Object.entries(currentWeekDates).map(([day, date]) => (
+        <Day key={day} day={day} date={date} />
       ))}
     </GridContainerDiv>
   );

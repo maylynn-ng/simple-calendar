@@ -47,7 +47,7 @@ export const Dashboard = () => {
       <Grid />
       {modalState.state === 'create-event' && (
         <Modal onOutsideClick={() => setModalState({ state: 'none' })}>
-          <CreateEvent />
+          <CreateEvent onSuccess={() => setModalState({ state: 'none' })} />
         </Modal>
       )}
     </DashboardContainerDiv>

@@ -12,11 +12,21 @@ export const hours = Array.from(
 );
 
 export const days = [
+  'Sunday',
   'Monday',
   'Tuesday',
   'Wednesday',
   'Thursday',
   'Friday',
   'Saturday',
-  'Sunday',
 ];
+
+export const dayDateMap = {
+  Monday: '',
+  Tuesday: '',
+  Wednesday: '',
+  Thursday: '',
+  Friday: '',
+  Saturday: '',
+  Sunday: '',
+};

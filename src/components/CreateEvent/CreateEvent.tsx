@@ -15,7 +15,11 @@ const CreateContainerDiv = styled.div`
   `}
 `;
 
-export const CreateEvent = () => {
+interface ICreateEventProps {
+  onSuccess: () => void;
+}
+
+export const CreateEvent = ({ onSuccess }: ICreateEventProps) => {
   const { setEvents } = useContext(EventContext);
   const dateNow = new Date(Date.now());
 
@@ -24,11 +28,12 @@ export const CreateEvent = () => {
     date: moment(dateNow).format('YYYY-MM-DD'),
     startTime: moment(dateNow).format('HH:mm'),
     endTime: moment(dateNow.getTime() + 3600 * 1000).format('HH:mm'),
-    color: '#DEBB58' as keyof typeof theme.eventColors,
+    color: 'yellow' as keyof typeof theme.eventColors,
   });
 
   const onSubmit = () => {
     setEvents(existing => [...existing, formData]);
+    onSuccess();
   };
 
   return (
