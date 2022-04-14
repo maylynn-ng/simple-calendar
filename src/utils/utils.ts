@@ -1,4 +1,4 @@
-import { days, dayDateMap } from './constants';
+import { days } from './constants';
 import { ICurrentWeek } from './types';
 
 export const getCurrentWeekDates = (date: Date) => {
