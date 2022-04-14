@@ -16,8 +16,7 @@ import {
 
 const DashboardContainerDiv = styled.div`
   ${({ theme }) => css`
-    background-color: ${theme.colors.muted};
-    padding: 1rem;
+    background-color: ${theme.colors.white};
 
     height: 100%;
     width: 100%;
@@ -25,12 +24,7 @@ const DashboardContainerDiv = styled.div`
     .page-heading {
       display: flex;
       flex-direction: row;
-      justify-content: center;
-
-      .month-year {
-        width: 100%;
-        text-align: center;
-      }
+      justify-content: space-around;
     }
 
     .page-contents {
@@ -38,12 +32,8 @@ const DashboardContainerDiv = styled.div`
       flex-direction: row;
       justify-content: center;
 
-      .buttons {
-        padding-right: 1rem;
-      }
-
       .button {
-        padding: 1rem 0;
+        padding: 1rem;
       }
     }
   `}
@@ -101,19 +91,23 @@ export const Dashboard = () => {
   return (
     <DashboardContainerDiv>
       <div className="page-heading">
-        <Button
-          text="<"
-          onClick={() => setCurrentWeekDates(prev => previousWeek(prev))}
-          mode="secondary"
-        />
+        <div className="button-navigation">
+          <Button
+            text="<"
+            onClick={() => setCurrentWeekDates(prev => previousWeek(prev))}
+            mode="secondary"
+          />
+        </div>
         <h1 className="month-year">
           {currentMonth}, {currentYear}
         </h1>
-        <Button
-          text=">"
-          onClick={() => setCurrentWeekDates(prev => nextWeek(prev))}
-          mode="secondary"
-        />
+        <div className="button-navigation">
+          <Button
+            text=">"
+            onClick={() => setCurrentWeekDates(prev => nextWeek(prev))}
+            mode="secondary"
+          />
+        </div>
       </div>
       <div className="page-contents">
         <div className="buttons">
@@ -144,18 +138,20 @@ export const Dashboard = () => {
         />
       </div>
       {modalState.state === 'create-event' && (
-        <Modal onOutsideClick={closeModals}>
+        <Modal>
           <CreateEvent
             onSubmit={onCreateEvent}
+            onCancel={closeModals}
             title="Create an event"
             primaryButtonText="Create"
           />
         </Modal>
       )}
       {modalState.state === 'edit-event' && (
-        <Modal onOutsideClick={closeModals}>
+        <Modal>
           <CreateEvent
             onSubmit={onEditEvent}
+            onCancel={closeModals}
             title="Edit event"
             eventData={{
               id: modalState.id,

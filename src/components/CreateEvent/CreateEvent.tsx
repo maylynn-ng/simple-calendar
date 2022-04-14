@@ -11,8 +11,18 @@ const CreateContainerDiv = styled.div`
     flex-direction: column;
 
     border-radius: ${theme.borderRadius.large};
+    border: solid 0.2rem ${theme.colors.secondary};
     padding: 3rem;
-    background-color: ${theme.colors.secondary};
+    background-color: ${theme.colors.offWhite};
+
+    .title {
+      color: ${theme.colors.primary};
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+    }
   `}
 `;
 
@@ -50,7 +60,7 @@ export const CreateEvent = ({
 
   return (
     <CreateContainerDiv>
-      <h1>{title}</h1>
+      <h1 className="title">{title}</h1>
       <FormField
         name="name"
         type="text"
@@ -78,11 +88,15 @@ export const CreateEvent = ({
         value={formData.endTime}
       />
 
-      <Button
-        onClick={() => onSubmit({ id: Symbol(), ...formData })}
-        text={primaryButtonText}
-        mode="primary"
-      />
+      <div className="buttons">
+        <Button onClick={() => onCancel?.()} text="Cancel" mode="primary" />
+
+        <Button
+          onClick={() => onSubmit({ id: Symbol(), ...formData })}
+          text={primaryButtonText}
+          mode="primary"
+        />
+      </div>
     </CreateContainerDiv>
   );
 };
@@ -99,8 +113,9 @@ const StyledInput = styled.input`
   ${({ theme }) => css`
     width: 100%;
 
-    padding: 0.25rem;
+    padding: 0.5rem;
     border-radius: ${theme.borderRadius.small};
+    margin: 1rem 0rem;
   `}
 `;
 

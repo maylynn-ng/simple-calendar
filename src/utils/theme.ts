@@ -16,6 +16,7 @@ export const theme: DefaultTheme = {
     muted: '#CBD18F',
 
     white: '#FBFAF5',
+    offWhite: '#f9f9f9',
   },
 
   eventColors: {

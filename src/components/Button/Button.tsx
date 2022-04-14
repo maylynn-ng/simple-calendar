@@ -14,8 +14,9 @@ const ContainerButton = styled.button<{ mode: IButtonProps['mode'] }>`
 
     ${mode === 'primary'
       ? `
+      border: solid 0.1rem ${theme.colors.primary};
       border-radius: ${theme.borderRadius.large};
-      background-color: ${theme.colors.primary};
+      background-color: ${theme.colors.white};
 
       `
       : `

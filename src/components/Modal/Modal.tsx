@@ -18,10 +18,9 @@ const ModalContainerDiv = styled.div`
 `;
 
 interface IModalProps {
-  onOutsideClick: () => void;
   children: ReactChild;
 }
 
-export const Modal = ({ children, onOutsideClick }: IModalProps) => {
+export const Modal = ({ children }: IModalProps) => {
   return <ModalContainerDiv>{children}</ModalContainerDiv>;
 };

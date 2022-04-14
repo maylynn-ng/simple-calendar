@@ -33,3 +33,26 @@ const changeWeek = (direction: 'previous' | 'next') => {
 
 export const nextWeek = changeWeek('next');
 export const previousWeek = changeWeek('previous');
+
+// EVENT POSITIONING
+
+export const calcTimeInMinutes = (time: string) => {
+  const splitTime = time.split(':');
+  return +splitTime[0] * 60 + +splitTime[1];
+};
+
+export const calcStartPositionPercentage = (timeInMinutes: number) => {
+  const minutesInDay = 1440;
+  return (timeInMinutes / minutesInDay) * 100;
+};
+
+export const calcHeight = ({
+  startTimeInMinutes,
+  endTimeInMinutes,
+}: {
+  startTimeInMinutes: number;
+  endTimeInMinutes: number;
+}) => {
+  const minutesInDay = 1440;
+  return ((endTimeInMinutes - startTimeInMinutes) / minutesInDay) * 100;
+};

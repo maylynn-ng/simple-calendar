@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCurrentWeekDates } from './utils';
+import { getCurrentWeekDates } from './calculations';
 import type { ICurrentWeek, IEvent } from './types';
 
 interface IEventContext {

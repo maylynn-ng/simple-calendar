@@ -15,6 +15,7 @@ declare module 'styled-components' {
       secondary: string;
       muted: string;
       white: string;
+      offWhite: string;
     };
     eventColors: {
       '0': string;
