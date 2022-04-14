@@ -1,20 +1,19 @@
 import styled, { css } from 'styled-components';
 
 import {
-  calcHeight,
+  calcHeightPercentage,
   calcStartPositionPercentage,
   calcTimeInMinutes,
 } from '../../utils';
 import type { IEvent } from '../../utils';
 
 const EventContainerDiv = styled.div<{
-  color: IEvent['color'];
   height: number;
   top: number;
   overlap: number;
   index: number;
 }>`
-  ${({ color, theme, height, top, overlap, index }) => css`
+  ${({ theme, height, top, overlap, index }) => css`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +27,7 @@ const EventContainerDiv = styled.div<{
 
     border-radius: ${theme.borderRadius.large};
     border: solid 2px white;
-    background-color: ${theme.eventColors[color]};
+    background-color: ${theme.eventColors[0]};
     padding-top: 0.2rem;
 
     cursor: pointer;
@@ -39,7 +38,6 @@ interface IEventProps {
   name: IEvent['name'];
   startTime: IEvent['startTime'];
   endTime: IEvent['endTime'];
-  color: IEvent['color'];
   onClick: () => void;
   overlap: number;
   index: number;
@@ -49,7 +47,6 @@ export const Event = ({
   name,
   startTime,
   endTime,
-  color,
   onClick,
   overlap,
   index,
@@ -62,8 +59,7 @@ export const Event = ({
       index={index}
       overlap={overlap}
       onClick={onClick}
-      color={color}
-      height={calcHeight({ startTimeInMinutes, endTimeInMinutes })}
+      height={calcHeightPercentage({ startTimeInMinutes, endTimeInMinutes })}
       top={calcStartPositionPercentage(startTimeInMinutes)}>
       <span>{name}</span>
       <span>

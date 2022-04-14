@@ -1,8 +1,8 @@
-import moment from 'moment';
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import { IEvent, theme } from '../../utils';
+import { theme, formatDate, formatTime } from '../../utils';
+import type { IEvent } from '../../utils';
 import { Button } from '../Button';
 
 const CreateContainerDiv = styled.div`
@@ -26,7 +26,7 @@ const CreateContainerDiv = styled.div`
   `}
 `;
 
-interface ICreateEventProps {
+interface IEventFormProps {
   onSubmit: (event: IEvent) => void;
   title: string;
   onCancel?: () => void;
@@ -34,21 +34,22 @@ interface ICreateEventProps {
   primaryButtonText: string;
 }
 
-export const CreateEvent = ({
+export const EventForm = ({
   onSubmit,
   title,
   onCancel,
   eventData,
   primaryButtonText,
-}: ICreateEventProps) => {
+}: IEventFormProps) => {
   const dateNow = new Date(Date.now());
 
+  // if no event data is passed then let the form default to right now
   const [formData, setFormData] = useState(
     eventData || {
       name: '',
-      date: moment(dateNow).format('YYYY-MM-DD'),
-      startTime: moment(dateNow).format('HH:mm'),
-      endTime: moment(dateNow.getTime() + 3600 * 1000).format('HH:mm'),
+      date: formatDate(dateNow),
+      startTime: formatTime(dateNow),
+      endTime: formatTime(dateNow.getTime() + 3600 * 1000),
       color: '0' as keyof typeof theme.eventColors,
     }
   );

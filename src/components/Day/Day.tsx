@@ -1,15 +1,17 @@
 import styled, { css } from 'styled-components';
 import { useContext } from 'react';
-import moment from 'moment';
 
 import { HourContainerDiv } from '../Grid';
 import {
   EventContext,
   hours,
-  IEvent,
   calcTimeInMinutes,
   calcStartPositionPercentage,
+  calcEventOverlap,
+  formatDate,
+  formatTime,
 } from '../../utils';
+import type { IEvent } from '../../utils';
 import { Event } from '../Event';
 
 const DayContainerDiv = styled.div`
@@ -45,45 +47,22 @@ export const Day = ({ day, date, onEventClick }: IDayProps) => {
 
   const today = new Date();
   const isToday = today.toLocaleDateString() === date.toLocaleDateString();
-  const timeRightNow = moment(today).format('HH:mm');
+  const timeRightNow = formatTime(today);
 
   const todaysEvents = events
-    .filter(
-      event =>
-        moment(event.date).format('YYYY-MM-DD') ===
-        moment(date).format('YYYY-MM-DD')
-    )
+    .filter(event => formatDate(event.date) === formatDate(date))
     .sort((a, b) => a.startTime.localeCompare(b.startTime));
 
-  const overlappedEvents = todaysEvents.map((todaysEvent, i) => {
-    let overlap = 0;
-    const startTimeInMinutes = calcTimeInMinutes(todaysEvent.startTime);
-    // only take the events previous to this one
-    todaysEvents.slice(0, i).forEach(event => {
-      const prevStartTime = calcTimeInMinutes(event.startTime);
-      const prevEndTime = calcTimeInMinutes(event.endTime);
-
-      if (
-        prevStartTime < startTimeInMinutes &&
-        startTimeInMinutes < prevEndTime
-      ) {
-        overlap++;
-      }
-    });
-
-    return { ...todaysEvent, overlap };
-  });
+  const overlappedEvents = calcEventOverlap(todaysEvents);
 
   return (
     <DayContainerDiv>
       <HourContainerDiv className="day-heading" isToday={isToday}>
-        <div className="day-heading-date">
-          <span>{day}</span>
-          <span>{date.getDate()}</span>
-        </div>
+        <span>{day}</span>
+        <span>{date.getDate()}</span>
       </HourContainerDiv>
       <div className="day-hours">
-        {isToday ? <TodayMarker time={timeRightNow} /> : null}
+        {isToday && <TodayMarker time={timeRightNow} />}
         {overlappedEvents.map((event, i) => (
           <Event
             index={i}
@@ -92,7 +71,6 @@ export const Day = ({ day, date, onEventClick }: IDayProps) => {
             name={event.name}
             startTime={event.startTime}
             endTime={event.endTime}
-            color={event.color}
             overlap={event.overlap}
           />
         ))}
@@ -106,7 +84,7 @@ export const Day = ({ day, date, onEventClick }: IDayProps) => {
 };
 
 const StyledMarkerDiv = styled.div<{ top: number }>`
-  ${({ top }) => css`
+  ${({ top, theme }) => css`
     position: absolute;
     top: ${top}%;
 
@@ -119,14 +97,14 @@ const StyledMarkerDiv = styled.div<{ top: number }>`
       height: 1rem;
       width: 1rem;
       border-radius: 50%;
-      background-color: red;
+      background-color: ${theme.colors.red};
     }
 
     .line {
       width: 100%;
       height: 0.1rem;
 
-      background-color: red;
+      background-color: ${theme.colors.red};
     }
   `}
 `;

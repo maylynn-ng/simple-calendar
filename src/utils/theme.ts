@@ -17,6 +17,8 @@ export const theme: DefaultTheme = {
 
     white: '#FBFAF5',
     offWhite: '#f9f9f9',
+
+    red: '#DC143C',
   },
 
   eventColors: {

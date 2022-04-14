@@ -1,8 +1,8 @@
+import { useContext } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Day } from '../Day';
 import { hours, EventContext } from '../../utils';
-import { useContext } from 'react';
 
 const GridContainerDiv = styled.div`
   ${({ theme }) => css`

@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { Grid } from '../Grid';
 import { Button } from '../Button';
 import { Modal } from '../Modal';
-import { CreateEvent } from '../CreateEvent';
+import { EventForm } from '../EventForm';
 import { IEvent } from '../../utils';
 import {
   EventContext,
@@ -51,7 +51,6 @@ type IModalState =
       date: IEvent['date'];
       startTime: IEvent['startTime'];
       endTime: IEvent['endTime'];
-      color: IEvent['color'];
     }
   | {
       state: 'event-details';
@@ -60,7 +59,6 @@ type IModalState =
       date: IEvent['date'];
       startTime: IEvent['startTime'];
       endTime: IEvent['endTime'];
-      color: IEvent['color'];
     };
 
 export const Dashboard = () => {
@@ -139,7 +137,7 @@ export const Dashboard = () => {
       </div>
       {modalState.state === 'create-event' && (
         <Modal>
-          <CreateEvent
+          <EventForm
             onSubmit={onCreateEvent}
             onCancel={closeModals}
             title="Create an event"
@@ -149,7 +147,7 @@ export const Dashboard = () => {
       )}
       {modalState.state === 'edit-event' && (
         <Modal>
-          <CreateEvent
+          <EventForm
             onSubmit={onEditEvent}
             onCancel={closeModals}
             title="Edit event"
@@ -159,7 +157,6 @@ export const Dashboard = () => {
               date: modalState.date,
               startTime: modalState.startTime,
               endTime: modalState.endTime,
-              color: modalState.color,
             }}
             primaryButtonText="Edit"
           />

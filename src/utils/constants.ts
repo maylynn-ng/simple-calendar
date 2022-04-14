@@ -21,16 +21,6 @@ export const days = [
   'Saturday',
 ];
 
-export const dayDateMap = {
-  Monday: '',
-  Tuesday: '',
-  Wednesday: '',
-  Thursday: '',
-  Friday: '',
-  Saturday: '',
-  Sunday: '',
-};
-
 export const months = [
   'January',
   'February',
