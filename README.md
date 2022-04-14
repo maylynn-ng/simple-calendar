@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# 📆 "Simple" Calendar App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The task was to create a "simple" calendar app using React.
 
-## Available Scripts
+![Screenshot of calendar](/public/screenshot-1.png)
 
-In the project directory, you can run:
+## 🏃‍♀️ Running locally
 
-### `yarn start`
+- clone the repo `git clone https://github.com/maylynn-ng/simple-calendar.git`
+- navigate into the app `cd simple-calendar`
+- install using yarn `yarn install`
+- start & get planning! `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 💪 Features Implemented
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Weekly calendar view
+- Users can navigate across weeks
+- Users can create single day events
+- Users can edit events
+- Events handle overlap
 
-### `yarn test`
+- Marker indicating the current day and time 📍 (see below for pic!)
+- "Today" button to navigate back to the current day
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🥵 Hurdles
 
-### `yarn build`
+- Deciding how to place the events on the page.
+  🙅‍♀️ Grid?
+  🙅‍♀️ Flexbox?
+  💁‍♀️ Plain css with absolute positioning
+- Surprisingly tricky... handling what datatype to format the date in.
+  - Datetime inputs likes visually appealing strings, doing anything else with calculating times does not 🙃
+- Timeframe. This feels like a big old task for 3 hours!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🤔 What I would have liked to do with more time
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Testing. 100% testing!! This was number one on my list, though to stick to the timeframe given to me I had to opt for the required features instead 😢
+- Styling. ✨ I'm not going to pretend that this calendar is at all beautiful. I would have loved to spend more time sorting out the scrolling, autoscroll to the 'right now' marker, having a proper colour scheme, having coloured events, generally just not an eyesore. The size of the app however meant I had to make the choice between this and features.
+- DARK MODE!!!! 🌚 Would have been very cool to implement this! I had even set up a global theme with styled components to make this a nice easy bonus once I had everything done. Though probably to get this right I would have had to have some actual nice styling 😬
+- There were a bunch of other smaller features I would have liked to have had time for, eg.
+  - click on a time on the grid to create an event then (like in google calendar)
+  - delete an event
+  - add a colour picker to the events
+  - add a little month view to the side
+  - have 'all day' events
+  - close the modals when you click outside of it
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Screenshot of today marker](/public/screenshot-2.png)
