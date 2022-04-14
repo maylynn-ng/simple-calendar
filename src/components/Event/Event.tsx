@@ -14,7 +14,7 @@ const EventContainerDiv = styled.div<{
     height: ${height}%;
     border-radius: ${theme.borderRadius};
 
-    background-color: ${theme.eventColors['yellow']};
+    background-color: ${theme.eventColors[color]};
   `}
 `;
 

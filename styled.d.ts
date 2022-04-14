@@ -7,11 +7,11 @@ declare module 'styled-components' {
     };
     borderRadius: string;
     eventColors: {
-      yellow: string;
-      beige: string;
-      lightBlue: string;
-      darkBlue: string;
-      brown: string;
+      '0': string;
+      '1': string;
+      '2': string;
+      '3': string;
+      '4': string;
     };
   }
 }

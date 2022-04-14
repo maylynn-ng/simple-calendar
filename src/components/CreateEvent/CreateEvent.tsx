@@ -11,7 +11,7 @@ const CreateContainerDiv = styled.div`
     flex-direction: column;
 
     padding: 3rem;
-    background-color: ${theme.eventColors.lightBlue};
+    background-color: ${theme.eventColors[2]};
   `}
 `;
 
@@ -28,7 +28,7 @@ export const CreateEvent = ({ onSuccess }: ICreateEventProps) => {
     date: moment(dateNow).format('YYYY-MM-DD'),
     startTime: moment(dateNow).format('HH:mm'),
     endTime: moment(dateNow.getTime() + 3600 * 1000).format('HH:mm'),
-    color: 'yellow' as keyof typeof theme.eventColors,
+    color: '0' as keyof typeof theme.eventColors,
   });
 
   const onSubmit = () => {

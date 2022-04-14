@@ -1,22 +1,35 @@
 import { days, dayDateMap } from './constants';
 import { ICurrentWeek } from './types';
 
-export const getCurrentWeekDates = () => {
-  const now = new Date();
-  const currentWeek: Partial<ICurrentWeek> = {};
-
+export const getCurrentWeekDates = (date: Date) => {
   const week = [];
   // Starting Monday not Sunday
-  now.setDate(now.getDate() - now.getDay() + 1);
+  date.setDate(date.getDate() - date.getDay() + 1);
   for (var i = 0; i < 7; i++) {
-    week.push(new Date(now));
-    now.setDate(now.getDate() + 1);
+    week.push(new Date(date));
+    date.setDate(date.getDate() + 1);
   }
 
-  week.forEach(day => {
+  return week.reduce((acc, day) => {
     const dayName = days[day.getDay()];
-    currentWeek[dayName as keyof typeof dayDateMap] = day;
-  });
-
-  return currentWeek as ICurrentWeek;
+    return { ...acc, [dayName]: day };
+  }, {}) as ICurrentWeek;
 };
+
+const changeWeek = (direction: 'previous' | 'next') => {
+  return (week: ICurrentWeek) => {
+    const change = direction === 'previous' ? -7 : 7;
+
+    return Object.entries(week).reduce((acc, [day, date]) => {
+      // make a copy of date object so as not to mutate the original
+      const previousDate = new Date(date);
+      const newDate = new Date(
+        previousDate.setDate(previousDate.getDate() + change)
+      );
+      return { ...acc, [day]: newDate };
+    }, {}) as ICurrentWeek;
+  };
+};
+
+export const nextWeek = changeWeek('next');
+export const previousWeek = changeWeek('previous');
