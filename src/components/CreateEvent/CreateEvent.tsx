@@ -1,8 +1,8 @@
 import moment from 'moment';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import { EventContext, theme } from '../../utils';
+import { IEvent, theme } from '../../utils';
 import { Button } from '../Button';
 
 const CreateContainerDiv = styled.div`
@@ -10,70 +10,99 @@ const CreateContainerDiv = styled.div`
     display: flex;
     flex-direction: column;
 
+    border-radius: ${theme.borderRadius.large};
     padding: 3rem;
-    background-color: ${theme.eventColors[2]};
+    background-color: ${theme.colors.secondary};
   `}
 `;
 
 interface ICreateEventProps {
-  onSuccess: () => void;
+  onSubmit: (event: IEvent) => void;
+  title: string;
+  onCancel?: () => void;
+  eventData?: IEvent;
+  primaryButtonText: string;
 }
 
-export const CreateEvent = ({ onSuccess }: ICreateEventProps) => {
-  const { setEvents } = useContext(EventContext);
+export const CreateEvent = ({
+  onSubmit,
+  title,
+  onCancel,
+  eventData,
+  primaryButtonText,
+}: ICreateEventProps) => {
   const dateNow = new Date(Date.now());
 
-  const [formData, setFormData] = useState({
-    name: '',
-    date: moment(dateNow).format('YYYY-MM-DD'),
-    startTime: moment(dateNow).format('HH:mm'),
-    endTime: moment(dateNow.getTime() + 3600 * 1000).format('HH:mm'),
-    color: '0' as keyof typeof theme.eventColors,
-  });
+  const [formData, setFormData] = useState(
+    eventData || {
+      name: '',
+      date: moment(dateNow).format('YYYY-MM-DD'),
+      startTime: moment(dateNow).format('HH:mm'),
+      endTime: moment(dateNow.getTime() + 3600 * 1000).format('HH:mm'),
+      color: '0' as keyof typeof theme.eventColors,
+    }
+  );
 
-  const onSubmit = () => {
-    setEvents(existing => [...existing, formData]);
-    onSuccess();
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   return (
     <CreateContainerDiv>
-      <h1>Create an event</h1>
+      <h1>{title}</h1>
       <FormField
         name="name"
         type="text"
         placeholder="Title"
-        onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
+        onChange={handleChange}
         value={formData.name}
       />
 
       <FormField
         name="date"
         type="date"
-        onChange={e => setFormData(prev => ({ ...prev, date: e.target.value }))}
+        onChange={handleChange}
         value={formData.date}
       />
       <FormField
         name="startTime"
         type="time"
-        onChange={e =>
-          setFormData(prev => ({ ...prev, startTime: e.target.value }))
-        }
+        onChange={handleChange}
         value={formData.startTime}
       />
       <FormField
         name="endTime"
         type="time"
-        onChange={e =>
-          setFormData(prev => ({ ...prev, endTime: e.target.value }))
-        }
+        onChange={handleChange}
         value={formData.endTime}
       />
 
-      <Button onClick={onSubmit} text="Create event" mode="primary" />
+      <Button
+        onClick={() => onSubmit({ id: Symbol(), ...formData })}
+        text={primaryButtonText}
+        mode="primary"
+      />
     </CreateContainerDiv>
   );
 };
+
+const FormFieldContainerDiv = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    flex-gap: 0.2rem;
+    justify-content: space-between;
+  `}
+`;
+
+const StyledInput = styled.input`
+  ${({ theme }) => css`
+    width: 100%;
+
+    padding: 0.25rem;
+    border-radius: ${theme.borderRadius.small};
+  `}
+`;
 
 interface IFormField {
   label?: string;
@@ -93,15 +122,15 @@ const FormField = ({
   value,
 }: IFormField) => {
   return (
-    <>
+    <FormFieldContainerDiv>
       {label && <label>{label}</label>}
-      <input
+      <StyledInput
         name={name}
         type={type}
         placeholder={placeholder}
         onChange={onChange}
         value={value}
       />
-    </>
+    </FormFieldContainerDiv>
   );
 };

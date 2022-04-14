@@ -5,7 +5,17 @@ declare module 'styled-components' {
     heights: {
       hour: string;
     };
-    borderRadius: string;
+    borderRadius: {
+      large: string;
+      small: string;
+    };
+
+    colors: {
+      primary: string;
+      secondary: string;
+      muted: string;
+      white: string;
+    };
     eventColors: {
       '0': string;
       '1': string;

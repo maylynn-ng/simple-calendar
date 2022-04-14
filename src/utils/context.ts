@@ -12,10 +12,10 @@ interface IEventContext {
 export const EventContext = React.createContext<IEventContext>({
   events: [],
   setEvents: () => {
-    console.log('context not found');
+    console.log('event context not found');
   },
   currentWeekDates: getCurrentWeekDates(new Date()),
   setCurrentWeekDates: () => {
-    console.log('context not found');
+    console.log('event context not found');
   },
 });

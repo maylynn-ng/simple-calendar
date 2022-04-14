@@ -2,9 +2,28 @@ import styled, { css } from 'styled-components';
 
 const ContainerButton = styled.button<{ mode: IButtonProps['mode'] }>`
   ${({ theme, mode }) => css`
-    padding: 0.5rem;
+    padding: 1rem 0.5rem;
+    height: 100%;
+    width: 100%;
 
-    ${mode === 'primary' ? `border-radius: ${theme.borderRadius}` : ''};
+    font-weight: bold;
+
+    border: none;
+
+    cursor: pointer;
+
+    ${mode === 'primary'
+      ? `
+      border-radius: ${theme.borderRadius.large};
+      background-color: ${theme.colors.primary};
+
+      `
+      : `
+      background-color: transparent;
+
+      font-size: 1.5rem;
+
+      `}
   `}
 `;
 

@@ -5,13 +5,17 @@ import { hours, EventContext } from '../../utils';
 import { useContext } from 'react';
 
 const GridContainerDiv = styled.div`
-  display: flex;
-  flex-direction: row;
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: row;
 
-  padding: 1rem;
+    padding: 2rem;
+    border-radius: ${theme.borderRadius};
+    height: 100%;
+    width: 100%;
 
-  height: 100%;
-  width: 100%;
+    background-color: ${theme.colors.white};
+  `}
 `;
 
 export const HourContainerDiv = styled.div`
@@ -22,7 +26,11 @@ export const HourContainerDiv = styled.div`
   `}
 `;
 
-export const Grid = () => {
+interface IGridProps {
+  onEventClick: React.ComponentProps<typeof Day>['onEventClick'];
+}
+
+export const Grid = ({ onEventClick }: IGridProps) => {
   const { currentWeekDates } = useContext(EventContext);
 
   return (
@@ -36,7 +44,7 @@ export const Grid = () => {
         ))}
       </div>
       {Object.entries(currentWeekDates).map(([day, date]) => (
-        <Day key={day} day={day} date={date} />
+        <Day key={day} day={day} date={date} onEventClick={onEventClick} />
       ))}
     </GridContainerDiv>
   );

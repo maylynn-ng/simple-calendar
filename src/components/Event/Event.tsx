@@ -8,13 +8,20 @@ const EventContainerDiv = styled.div<{
   top: number;
 }>`
   ${({ color, theme, height, top }) => css`
+    display: flex;
+    flex-direction: column;
+
     position: absolute;
     top: ${top}%;
-
     height: ${height}%;
-    border-radius: ${theme.borderRadius};
+    width: 100%;
 
+    padding: 0.2rem;
+    border-radius: ${theme.borderRadius.large};
+    border: solid 2px white;
     background-color: ${theme.eventColors[color]};
+
+    cursor: pointer;
   `}
 `;
 
@@ -23,21 +30,29 @@ interface IEventProps {
   startTime: IEvent['startTime'];
   endTime: IEvent['endTime'];
   color: IEvent['color'];
+  onClick: () => void;
 }
 
-export const Event = ({ name, startTime, endTime, color }: IEventProps) => {
+export const Event = ({
+  name,
+  startTime,
+  endTime,
+  color,
+  onClick,
+}: IEventProps) => {
   const startTimeInMinutes = calcTimeInMinutes(startTime);
   const endTimeInMinutes = calcTimeInMinutes(endTime);
 
   return (
     <EventContainerDiv
+      onClick={onClick}
       color={color}
       height={calcHeight({ startTimeInMinutes, endTimeInMinutes })}
       top={calcStartPositionPercentage(startTimeInMinutes)}>
-      <p>{name}</p>
-      <p>
+      <span>{name}</span>
+      <span>
         {startTime} - {endTime}
-      </p>
+      </span>
     </EventContainerDiv>
   );
 };

@@ -5,7 +5,18 @@ export const theme: DefaultTheme = {
     hour: '3rem',
   },
 
-  borderRadius: '1rem',
+  borderRadius: {
+    large: '1rem',
+    small: '0.5rem',
+  },
+
+  colors: {
+    primary: '#E3B448',
+    secondary: '#3A6B35',
+    muted: '#CBD18F',
+
+    white: '#FBFAF5',
+  },
 
   eventColors: {
     '0': '#DEBB58',
